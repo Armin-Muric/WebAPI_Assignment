@@ -1,20 +1,38 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.Contexts;
+using Infrastructure.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebAPI_Assignment.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class SubscribeController : ControllerBase
+public class SubscribeController(ApiContext context) : ControllerBase
 {
+    private readonly ApiContext _context = context;
+
     [HttpPost]
-    public async Task<IActionResult> Subscribe()
+    public async Task<IActionResult> Subscribe(string email)
     {
-        return Ok();
+        if (ModelState.IsValid)
+        {
+            if (await _context.Subscribers.AnyAsync(x => x.Email == email))
+                return Conflict();
+
+            _context.Add(new SubscribersEntity { Email = email });
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+        return BadRequest();
     }
 
     [HttpDelete]
-    public async Task<IActionResult> Unsubscribe()
+    public async Task<IActionResult> Unsubscribe(string email)
     {
-        return Ok();
+        if (ModelState.IsValid)
+        {
+
+        }
+        return BadRequest();
     }
 }
