@@ -7,12 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contexts\" />
-    <Folder Include="Entities\" />
-    <Folder Include="Models\" />
-    <Folder Include="Factories\" />
-    <Folder Include="Filters\" />
-    <Folder Include="Services\" />
+    <Folder Include="Database\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +20,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
 
 </Project>
